@@ -22,7 +22,26 @@ Originally a Marie fork, Texas was created for personal use by [this person](htt
 
 Can be found on telegram as [Texas](https://t.me/TexasArkrobot).
 
-If you want to create your own bot, you can basically follow the steps given [here](https://github.com/PaulSonOfLars/tgbot/blob/master/README.md)
+The Support group can be reached out to at [Zero Union](https://t.me/ZeroBotSupport), where you can ask for help setting up your bot, discover/request new features, report bugs, and stay in the loop whenever a new update is available. 
+
+
+## Setting up the bot (Read this before trying to use!):
+
+
+# How to setup
+
+- `git clone https://github.com/ChisakiKai/TexasRoboto`
+- `cd TexasRoboto`
+- `cp sample_config.py config.py`
+- *Fill in all the vars*
+- `pip3 install -U -r requirements.txt`
+- *And finally* `python3 -m tg_bot`
+
+*Enjoy!*
+
+
+For queries or any issues regarding the bot please open an issue ticket or visit us at [Zero Union](https://t.me/ZeroBotSupport)  
+
 
 OR
 
