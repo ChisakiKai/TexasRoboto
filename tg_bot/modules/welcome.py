@@ -431,39 +431,38 @@ def welcomemute(bot: Bot, update: Update, args: List[str]) -> str:
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
     msg = update.effective_message # type: Optional[Message]
-    
+
     if len(args) >= 1:
         if  args[0].lower() in ("off", "no"):
             sql.set_welcome_mutes(chat.id, False)
             msg.reply_text("I will no longer mute people on joining!")
             return "<b>{}:</b>" \
-                           "\n#WELCOME_MUTE" \
-                           "\n<b>• Admin:</b> {}" \
-                           "\nHas toggled welcome mute to <b>OFF</b>.".format(escape(chat.title),
+                               "\n#WELCOME_MUTE" \
+                               "\n<b>• Admin:</b> {}" \
+                               "\nHas toggled welcome mute to <b>OFF</b>.".format(escape(chat.title),
                                                                       mention_html(user.id, user.first_name))
         if args[0].lower() in ("soft"):
              sql.set_welcome_mutes(chat.id, "soft")
              msg.reply_text("I will restrict users' permission to send media for 24 hours.")
              return "<b>{}:</b>" \
-                            "\n#WELCOME_MUTE" \
-                            "\n<b>• Admin:</b> {}" \
-                            "\nHas toggled welcome mute to <b>SOFT</b>.".format(escape(chat.title),
+                                "\n#WELCOME_MUTE" \
+                                "\n<b>• Admin:</b> {}" \
+                                "\nHas toggled welcome mute to <b>SOFT</b>.".format(escape(chat.title),
                                                                        mention_html(user.id, user.first_name))
         if args[0].lower() in ("strong"):
              sql.set_welcome_mutes(chat.id, "strong")
              msg.reply_text("I will now mute people when they join until they prove they're not a bot.")
              return "<b>{}:</b>" \
-                            "\n#WELCOME_MUTE" \
-                            "\n<b>• Admin:</b> {}" \
-                            "\nHas toggled welcome mute to <b>STRONG</b>.".format(escape(chat.title),
+                                "\n#WELCOME_MUTE" \
+                                "\n<b>• Admin:</b> {}" \
+                                "\nHas toggled welcome mute to <b>STRONG</b>.".format(escape(chat.title),
                                                                           mention_html(user.id, user.first_name))
         msg.reply_text("Please enter `off`/`no`/`soft`/`strong`!", parse_mode=ParseMode.MARKDOWN)
         return ""
-    else:
-        curr_setting = sql.welcome_mutes(chat.id)
-        reply = "\n Give me a setting! Choose one out of: `off`/`no` or `soft` or `strong` only! \nCurrent setting: `{}`"
-        msg.reply_text(reply.format(curr_setting), parse_mode=ParseMode.MARKDOWN)
-        return ""
+    curr_setting = sql.welcome_mutes(chat.id)
+    reply = "\n Give me a setting! Choose one out of: `off`/`no` or `soft` or `strong` only! \nCurrent setting: `{}`"
+    msg.reply_text(reply.format(curr_setting), parse_mode=ParseMode.MARKDOWN)
+    return ""
 
 
 @run_async

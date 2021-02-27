@@ -277,8 +277,7 @@ def connected(bot: Bot, update: Update,  chat, user_id, need_admin=True):
                     return conn_id
                 send_message(msg, "You must be an admin in the connected group!")
                 raise Exception("Not admin!")
-            else:
-                return conn_id
+            return conn_id
         else:
             send_message(
                 msg,
