@@ -11,11 +11,13 @@ class Config(object):
 
     # REQUIRED
     API_KEY = "YOUR KEY HERE"
-    OWNER_ID = "YOUR ID HERE"  # If you dont know, run the bot and do /id in your private chat with it
+    # If you dont know, run the bot and do /id in your private chat with it
+    OWNER_ID = "YOUR ID HERE"
     OWNER_USERNAME = "YOUR USERNAME HERE"
 
     # RECOMMENDED
-    SQLALCHEMY_DATABASE_URI = 'sqldbtype://username:pw@hostname:port/db_name'  # needed for any database modules
+    # needed for any database modules
+    SQLALCHEMY_DATABASE_URI = 'sqldbtype://username:pw@hostname:port/db_name'
     MESSAGE_DUMP = None  # needed to make sure 'save from' messages persist
     LOAD = []
     # sed has been disabled after the discovery that certain long-running sed commands maxed out cpu usage
@@ -26,9 +28,12 @@ class Config(object):
 
     # OPTIONAL
     DEV_USERS = []
-    SUDO_USERS = []  # List of id's (not usernames) for users which have sudo access to the bot.
-    SUPPORT_USERS = []  # List of id's (not usernames) for users which are allowed to gban, but can also be banned.
-    WHITELIST_USERS = []  # List of id's (not usernames) for users which WONT be banned/kicked by the bot.
+    # List of id's (not usernames) for users which have sudo access to the bot.
+    SUDO_USERS = []
+    # List of id's (not usernames) for users which are allowed to gban, but can also be banned.
+    SUPPORT_USERS = []
+    # List of id's (not usernames) for users which WONT be banned/kicked by the bot.
+    WHITELIST_USERS = []
     DONATION_LINK = None  # EG, paypal
     CERT_PATH = None
     PORT = 5000
@@ -45,6 +50,7 @@ class Config(object):
     LASTFM_API_KEY = ''
     AI_API_KEY = ''
     BL_CHATS = []
+
 
 class Production(Config):
     LOGGER = False
