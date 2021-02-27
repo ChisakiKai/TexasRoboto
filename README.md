@@ -15,10 +15,8 @@ OR
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ChisakiKai/TexasRoboto.git)
 
 ## Credits
++ [rsktg](https://github.com/rsktg)[Pɧơɛnıх](https://github.com/rsktg/TheRealPhoenixBot) owner for base this bot.
 + [SkittBot](https://github.com/skittles9823/SkittBot) for stickers module.
 + [SaitamaRobot](https://github.com/AnimeKaizoku/SaitamaRobot) for evaluator and more.
-+ MrYacha, Ayra Hikari and Mizukito Akito for Federations.
-• 1maverick1 for welcome mutes.
-
-
-## Notice
++ [MrYacha](https://github.com/MrYacha), [Ayra Hikari](https://github.com/AyraHikari) and [Mizukito Akito](https://github.com/RealAkito) for Federations.
++ [1maverick1](https://github.com/1maverick1) for welcome mutes.
