@@ -110,16 +110,15 @@ def button(bot: Bot, update: Update) -> str:
                 parse_mode=ParseMode.HTML)
             user_member = chat.get_member(user_id)
             return "<b>{}:</b>" \
-                   "\n#UNWARN" \
-                   "\n<b>Admin:</b> {}" \
-                   "\n<b>User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
+                           "\n#UNWARN" \
+                           "\n<b>Admin:</b> {}" \
+                           "\n<b>User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                                 mention_html(user.id, user.first_name),
                                                                 mention_html(user_member.user.id, user_member.user.first_name),
                                                                 user_member.user.id)
-        else:
-            update.effective_message.edit_text(
-                "User already has no warns.".format(mention_html(user.id, user.first_name)),
-                parse_mode=ParseMode.HTML)
+        update.effective_message.edit_text(
+            "User already has no warns.".format(mention_html(user.id, user.first_name)),
+            parse_mode=ParseMode.HTML)
 
     return ""
 
@@ -138,8 +137,7 @@ def warn_user(bot: Bot, update: Update, args: List[str]) -> str:
     if user_id:
         if message.reply_to_message and message.reply_to_message.from_user.id == user_id:
             return warn(message.reply_to_message.from_user, chat, reason, message.reply_to_message, warner)
-        else:
-            return warn(chat.get_member(user_id).user, chat, reason, message, warner)
+        return warn(chat.get_member(user_id).user, chat, reason, message, warner)
     else:
         message.reply_text("No user was designated!")
     return ""
@@ -161,15 +159,14 @@ def remove_warn(bot: Bot, update: Update, args: List[str]) -> str:
         message.reply_text("Last warning has been removed!")
         warned = chat.get_member(user_id).user
         return "<b>{}:</b>" \
-               "\n#UNWARN" \
-               "\n<b>• Admin:</b> {}" \
-               "\n<b>• User:</b> {}" \
-               "\n<b>• ID:</b> <code>{}</code>".format(html.escape(chat.title),
+                   "\n#UNWARN" \
+                   "\n<b>• Admin:</b> {}" \
+                   "\n<b>• User:</b> {}" \
+                   "\n<b>• ID:</b> <code>{}</code>".format(html.escape(chat.title),
                                                        mention_html(user.id, user.first_name),
                                                        mention_html(warned.id, warned.first_name),
                                                        warned.id)
-    else:
-        message.reply_text("No user has been designated!")
+    message.reply_text("No user has been designated!")
     return ""
 
 
@@ -189,14 +186,13 @@ def reset_warns(bot: Bot, update: Update, args: List[str]) -> str:
         message.reply_text("Warnings have been reset!")
         warned = chat.get_member(user_id).user
         return "<b>{}:</b>" \
-               "\n#RESETWARNS" \
-               "\n<b>Admin:</b> {}" \
-               "\n<b>User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
+                   "\n#RESETWARNS" \
+                   "\n<b>Admin:</b> {}" \
+                   "\n<b>User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name),
                                                             mention_html(warned.id, warned.first_name),
                                                             warned.id)
-    else:
-        message.reply_text("No user has been designated!")
+    message.reply_text("No user has been designated!")
     return ""
 
 
@@ -373,21 +369,19 @@ def set_warn_strength(bot: Bot, update: Update, args: List[str]):
             sql.set_warn_strength(chat.id, False)
             msg.reply_text("Too many warns will now result in a ban!")
             return "<b>{}:</b>\n" \
-                   "<b>Admin:</b> {}\n" \
-                   "Has enabled strong warns. Users will be banned.".format(html.escape(chat.title),
+                           "<b>Admin:</b> {}\n" \
+                           "Has enabled strong warns. Users will be banned.".format(html.escape(chat.title),
                                                                             mention_html(user.id, user.first_name))
 
-        elif args[0].lower() in ("off", "no"):
+        if args[0].lower() in ("off", "no"):
             sql.set_warn_strength(chat.id, True)
             msg.reply_text("Too many warns will now result in a kick! Users will be able to join again after.")
             return "<b>{}:</b>\n" \
-                   "<b>Admin:</b> {}\n" \
-                   "Has disabled strong warns. Users will only be kicked.".format(html.escape(chat.title),
+                           "<b>Admin:</b> {}\n" \
+                           "Has disabled strong warns. Users will only be kicked.".format(html.escape(chat.title),
                                                                                   mention_html(user.id,
                                                                                                user.first_name))
-
-        else:
-            msg.reply_text("I only understand on/yes/no/off!")
+        msg.reply_text("I only understand on/yes/no/off!")
     else:
         limit, soft_warn = sql.get_warn_setting(chat.id)
         if soft_warn:

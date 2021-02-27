@@ -101,11 +101,10 @@ def gban(bot: Bot, update: Update, args: List[str]):
             if old_reason == reason:
                 message.reply_text("This user is already gbanned for the exact same reason!")
                 return
-            else:
-                message.reply_text("This user is already gbanned, for the following reason:\n"
-                                   "<code>{}</code>\n"
-                                   "I've gone and updated it with your new reason!".format(html.escape(old_reason)),
-                                   parse_mode=ParseMode.HTML)
+            message.reply_text("This user is already gbanned, for the following reason:\n"
+                               "<code>{}</code>\n"
+                               "I've gone and updated it with your new reason!".format(html.escape(old_reason)),
+                               parse_mode=ParseMode.HTML)
         else:
             message.reply_text("This user is already gbanned, but had no reason set; I've gone and updated it!")
 

@@ -275,9 +275,8 @@ def connected(bot: Bot, update: Update,  chat, user_id, need_admin=True):
                     or user.id in DEV_USERS
                 ):
                     return conn_id
-                else:
-                    send_message(msg, "You must be an admin in the connected group!")
-                    raise Exception("Not admin!")
+                send_message(msg, "You must be an admin in the connected group!")
+                raise Exception("Not admin!")
             else:
                 return conn_id
         else:
@@ -299,8 +298,7 @@ def help_connect_chat(bot: Bot, update: Update):
     if msg.chat.type != "private":
         send_message(msg, "PM me with that command to get help.")
         return
-    else:
-        send_message(msg, CONNECT_HELP_TXT, parse_mode="markdown")
+    send_message(msg, CONNECT_HELP_TXT, parse_mode="markdown")
 
 
 

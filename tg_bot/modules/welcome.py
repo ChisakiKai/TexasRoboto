@@ -12,7 +12,7 @@ from telegram.utils.helpers import mention_html
 
 import tg_bot.modules.sql.welcome_sql as sql
 from tg_bot import dispatcher, OWNER_ID, LOGGER, SUDO_USERS, SUPPORT_USERS
-from tg_bot.modules.helper_funcs.chat_status import user_admin, can_delete, is_user_ban_protected
+from tg_bot.modules.helper_funcs.chat_status import user_admin, is_user_ban_protected
 from tg_bot.modules.helper_funcs.misc import build_keyboard, revert_buttons
 from tg_bot.modules.helper_funcs.msg_types import get_welcome_type
 from tg_bot.modules.helper_funcs.string_handling import markdown_parser, \
@@ -102,17 +102,17 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
                 continue
 
             # Welcome Sudos 
-            elif new_mem.id in SUDO_USERS:
+            if new_mem.id in SUDO_USERS:
                 update.effective_message.reply_text("Ayy, one of my sudo users just joined! 👀")
                 continue
 			 
             # Welcome Support
-            elif new_mem.id in SUPPORT_USERS:
+            if new_mem.id in SUPPORT_USERS:
                 update.effective_message.reply_text("Ayy, one of my support users just joined! 👀")
                 continue
-                
+    
              # Make bot greet admins
-            elif new_mem.id == bot.id:
+            if new_mem.id == bot.id:
                 update.effective_message.reply_text("Hey {}, I'm {}! Thank you for adding me to {}" 
                 " and be sure to check /help in PM for more commands and tricks!".format(user.first_name, bot.first_name, chat_name))
 
@@ -170,7 +170,7 @@ def new_member(bot: Bot, update: Update, job_queue: JobQueue):
                 if welc_mutes == "strong":
                     new_join_mem = "[{}](tg://user?id={})".format(new_mem.first_name, user_id)
                     wm_msg = msg.reply_text("{}, click the button below to prove you're human. " \
-                            "You've got 2 minutes.".format(new_join_mem),
+                                        "You've got 2 minutes.".format(new_join_mem),
                          reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Yes, I'm human.", 
                          callback_data="user_join_({})".format(new_mem.id))]]), parse_mode=ParseMode.MARKDOWN)
                     try:
@@ -437,29 +437,28 @@ def welcomemute(bot: Bot, update: Update, args: List[str]) -> str:
             sql.set_welcome_mutes(chat.id, False)
             msg.reply_text("I will no longer mute people on joining!")
             return "<b>{}:</b>" \
-                   "\n#WELCOME_MUTE" \
-                   "\n<b>• Admin:</b> {}" \
-                   "\nHas toggled welcome mute to <b>OFF</b>.".format(escape(chat.title),
+                           "\n#WELCOME_MUTE" \
+                           "\n<b>• Admin:</b> {}" \
+                           "\nHas toggled welcome mute to <b>OFF</b>.".format(escape(chat.title),
                                                                       mention_html(user.id, user.first_name))
-        elif args[0].lower() in ("soft"):
+        if args[0].lower() in ("soft"):
              sql.set_welcome_mutes(chat.id, "soft")
              msg.reply_text("I will restrict users' permission to send media for 24 hours.")
              return "<b>{}:</b>" \
-                    "\n#WELCOME_MUTE" \
-                    "\n<b>• Admin:</b> {}" \
-                    "\nHas toggled welcome mute to <b>SOFT</b>.".format(escape(chat.title),
+                            "\n#WELCOME_MUTE" \
+                            "\n<b>• Admin:</b> {}" \
+                            "\nHas toggled welcome mute to <b>SOFT</b>.".format(escape(chat.title),
                                                                        mention_html(user.id, user.first_name))
-        elif args[0].lower() in ("strong"):
+        if args[0].lower() in ("strong"):
              sql.set_welcome_mutes(chat.id, "strong")
              msg.reply_text("I will now mute people when they join until they prove they're not a bot.")
              return "<b>{}:</b>" \
-                    "\n#WELCOME_MUTE" \
-                    "\n<b>• Admin:</b> {}" \
-                    "\nHas toggled welcome mute to <b>STRONG</b>.".format(escape(chat.title),
+                            "\n#WELCOME_MUTE" \
+                            "\n<b>• Admin:</b> {}" \
+                            "\nHas toggled welcome mute to <b>STRONG</b>.".format(escape(chat.title),
                                                                           mention_html(user.id, user.first_name))
-        else:
-            msg.reply_text("Please enter `off`/`no`/`soft`/`strong`!", parse_mode=ParseMode.MARKDOWN)
-            return ""
+        msg.reply_text("Please enter `off`/`no`/`soft`/`strong`!", parse_mode=ParseMode.MARKDOWN)
+        return ""
     else:
         curr_setting = sql.welcome_mutes(chat.id)
         reply = "\n Give me a setting! Choose one out of: `off`/`no` or `soft` or `strong` only! \nCurrent setting: `{}`"
@@ -486,24 +485,21 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
         sql.set_clean_welcome(str(chat.id), True)
         update.effective_message.reply_text("I'll try to delete old welcome messages!")
         return "<b>{}:</b>" \
-               "\n#CLEAN_WELCOME" \
-               "\n<b>Admin:</b> {}" \
-               "\nHas toggled clean welcomes to <code>ON</code>.".format(escape(chat.title),
+                   "\n#CLEAN_WELCOME" \
+                   "\n<b>Admin:</b> {}" \
+                   "\nHas toggled clean welcomes to <code>ON</code>.".format(escape(chat.title),
                                                                          mention_html(user.id, user.first_name))
-    elif args[0].lower() in ("off", "no"):
+    if args[0].lower() in ("off", "no"):
         sql.set_clean_welcome(str(chat.id), False)
         update.effective_message.reply_text("I won't delete old welcome messages.")
         return "<b>{}:</b>" \
-               "\n#CLEAN_WELCOME" \
-               "\n<b>Admin:</b> {}" \
-               "\nHas toggled clean welcomes to <code>OFF</code>.".format(escape(chat.title),
+                   "\n#CLEAN_WELCOME" \
+                   "\n<b>Admin:</b> {}" \
+                   "\nHas toggled clean welcomes to <code>OFF</code>.".format(escape(chat.title),
                                                                           mention_html(user.id, user.first_name))
-    else:
-        # idek what you're writing, say yes or no
-        update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
-        return ""
-        
-        
+    # idek what you're writing, say yes or no
+    update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
+    return ""
 @run_async
 def user_button(bot: Bot, update: Update):
     chat = update.effective_chat  # type: Optional[Chat]

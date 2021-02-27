@@ -38,18 +38,17 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
         if excp.message == "User not found":
             message.reply_text("I can't seem to find this user")
             return ""
-        else:
-            raise
+        raise
 
     if user_id == int(OWNER_ID):
         message.reply_text("I'm not gonna ban my owner, want me to ban you instead?!")
         return ""
 
-    elif user_id == bot.id:
+    if user_id == bot.id:
         message.reply_text("I'm not gonna BAN myself, are you crazy?")
         return ""
 
-    elif is_user_ban_protected(chat, user_id, member):
+    if is_user_ban_protected(chat, user_id, member):
         message.reply_text("I really wish I could ban admins...")
         return ""
 
@@ -74,11 +73,10 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
             # Do not reply
             message.reply_text('Banned!', quote=False)
             return log
-        else:
-            LOGGER.warning(update)
-            LOGGER.exception("ERROR banning user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
-                             excp.message)
-            message.reply_text("Well damn, I can't ban that user.")
+        LOGGER.warning(update)
+        LOGGER.exception("ERROR banning user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
+                         excp.message)
+        message.reply_text("Well damn, I can't ban that user.")
 
     return ""
 
@@ -106,13 +104,13 @@ def sban(bot: Bot, update: Update, args: List[str]) -> str:
         
     if user_id == int(OWNER_ID):
         return ""
-        
-    elif user_id == bot.id:
+    
+    if user_id == bot.id:
         return ""
-        
-    elif is_user_ban_protected(chat, user_id, mem):
+    
+    if is_user_ban_protected(chat, user_id, mem):
         return ""
-        
+    
     log = "<b>{}:</b>" \
           "\n#SBANNED" \
           "\n<b>Admin:</b> {}" \
@@ -162,8 +160,7 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
         if excp.message == "User not found":
             message.reply_text("I can't seem to find this user.")
             return ""
-        else:
-            raise
+        raise
 
     if is_user_ban_protected(chat, user_id, member):
         message.reply_text("I really wish I could ban admins..")
@@ -213,11 +210,10 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
             # Do not reply
             message.reply_text("Banned! User will be banned for {}.".format(time_val), quote=False)
             return log
-        else:
-            LOGGER.warning(update)
-            LOGGER.exception("ERROR banning user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
-                             excp.message)
-            message.reply_text("Well damn, I can't ban that user.")
+        LOGGER.warning(update)
+        LOGGER.exception("ERROR banning user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
+                         excp.message)
+        message.reply_text("Well damn, I can't ban that user.")
 
     return ""
 
@@ -244,8 +240,7 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
         if excp.message == "User not found":
             message.reply_text("I can't seem to find this user")
             return ""
-        else:
-            raise
+        raise
 
     if is_user_ban_protected(chat, user_id):
         message.reply_text("I really wish I could kick admins...")
@@ -260,9 +255,9 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
         bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
         message.reply_text("Kicked!")
         log = "<b>{}:</b>" \
-              "\n#KICKED" \
-              "\n<b>Admin:</b> {}" \
-              "\n<b>User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
+                  "\n#KICKED" \
+                  "\n<b>Admin:</b> {}" \
+                  "\n<b>User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                            mention_html(user.id, user.first_name),
                                                            mention_html(member.user.id, member.user.first_name),
                                                            member.user.id)
@@ -270,9 +265,7 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
             log += "\n<b>Reason:</b> {}".format(reason)
 
         return log
-
-    else:
-        message.reply_text("Well damn, I can't kick that user.")
+    message.reply_text("Well damn, I can't kick that user.")
 
     return ""
 
@@ -333,8 +326,7 @@ def unban(bot: Bot, update: Update, args: List[str]) -> str:
         if excp.message == "User not found":
             message.reply_text("I can't seem to find this user")
             return ""
-        else:
-            raise
+        raise
 
     if user_id == bot.id:
         message.reply_text("How would I unban myself if I wasn't here...?")

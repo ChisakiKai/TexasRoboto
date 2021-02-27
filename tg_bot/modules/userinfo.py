@@ -87,7 +87,7 @@ def set_about_bio(bot: Bot, update: Update):
         if user_id == message.from_user.id:
             message.reply_text("Ha, you can't set your own bio! You're at the mercy of others here...")
             return
-        elif user_id == bot.id and sender.id not in SUDO_USERS:
+        if user_id == bot.id and sender.id not in SUDO_USERS:
             message.reply_text("Erm... yeah, I only trust sudo users to set my bio.")
             return
 
@@ -110,12 +110,11 @@ def __user_info__(user_id):
     me = html.escape(sql.get_user_me_info(user_id) or "")
     if bio and me:
         return "<b>About user:</b>\n{me}\n<b>What others say:</b>\n{bio}".format(me=me, bio=bio)
-    elif bio:
+    if bio:
         return "<b>What others say:</b>\n{bio}\n".format(me=me, bio=bio)
-    elif me:
+    if me:
         return "<b>About user:</b>\n{me}""".format(me=me, bio=bio)
-    else:
-        return ""
+    return ""
 
 
 def __gdpr__(user_id):

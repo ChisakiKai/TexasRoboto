@@ -40,9 +40,7 @@ def shellExecute(bot: Bot, update: Update):
         if output[1].decode():
             sendMessage(f"<code>{output[1].decode()}</code>", bot, update)
             return
-        else:
-            sendMessage(f"<code>{output[0].decode()}</code>", bot, update)
-                                                                                                    
+        sendMessage(f"<code>{output[0].decode()}</code>", bot, update)
 
 shell_handler = CommandHandler(('sh','shell'), shellExecute)
 dispatcher.add_handler(shell_handler)

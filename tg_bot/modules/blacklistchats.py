@@ -2,7 +2,7 @@ from telegram import Bot, Update
 from telegram.ext import MessageHandler, Filters, DispatcherHandlerStop
 from telegram.error import TelegramError
 
-from tg_bot import dispatcher, BL_CHATS, LOGGER, OWNER_ID
+from tg_bot import dispatcher, BL_CHATS, LOGGER
 
 
 BL_CHATS_GROUP = -1

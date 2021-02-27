@@ -1,6 +1,6 @@
 import threading
 
-from sqlalchemy import Column, String, UnicodeText, func, distinct, Integer, Boolean
+from sqlalchemy import Column, String, UnicodeText, Integer, Boolean
 
 from tg_bot.modules.sql import SESSION, BASE
 
@@ -95,9 +95,8 @@ def get_fed_info(fed_id):
 def get_fed_id(chat_id):
 	get = FEDERATION_CHATS.get(str(chat_id))
 	if get == None:
-		return False
-	else:
-		return get['fid']
+	    return False
+	return get['fid']
 
 
 def new_fed(owner_id, fed_name, fed_id):
@@ -174,10 +173,7 @@ def search_user_in_fed(fed_id, user_id):
 	if getfed == None:
 		return False
 	getfed = eval(getfed['fusers'])['members']
-	if user_id in eval(getfed):
-		return True
-	else:
-		return False
+	return user_id in eval(getfed)
 
 
 def user_demote_fed(fed_id, user_id):
@@ -263,9 +259,8 @@ def all_fed_chats(fed_id):
 	with FEDS_LOCK:
 		getfed = FEDERATION_CHATS_BYID.get(fed_id)
 		if getfed == None:
-			return []
-		else:
-			return getfed
+		    return []
+		return getfed
 
 def all_fed_users(fed_id):
 	with FEDS_LOCK:
@@ -354,15 +349,14 @@ def get_fban_user(fed_id, user_id):
 	if list_fbanned == None:
 		FEDERATION_BANNED_USERID[fed_id] = []
 	if user_id in FEDERATION_BANNED_USERID[fed_id]:
-		r = SESSION.query(BansF).all()
-		reason = None
-		for I in r:
-			if I.fed_id == fed_id:
-				if int(I.user_id) == int(user_id):
-					reason = I.reason
-		return True, reason
-	else:
-		return False, None
+	    r = SESSION.query(BansF).all()
+	    reason = None
+	    for I in r:
+	        if I.fed_id == fed_id:
+	            if int(I.user_id) == int(user_id):
+	                reason = I.reason
+	    return True, reason
+	return False, None
 
 
 def get_all_fban_users(fed_id):
@@ -398,9 +392,8 @@ def get_all_feds_users_global():
 def search_fed_by_id(fed_id):
 	get = FEDERATION_BYFEDID.get(fed_id)
 	if get == None:
-		return False
-	else:
-		return get
+	    return False
+	return get
 	result = False
 	for Q in curr:
 		if Q.fed_id == fed_id:

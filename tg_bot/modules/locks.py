@@ -109,12 +109,12 @@ def lock(bot: Bot, update: Update, args: List[str]) -> str:
                 message.reply_text("Locked {} messages for all non-admins!".format(args[0]))
 
                 return "<b>{}:</b>" \
-                       "\n#LOCK" \
-                       "\n<b>Admin:</b> {}" \
-                       "\nLocked <code>{}</code>.".format(html.escape(chat.title),
+                                   "\n#LOCK" \
+                                   "\n<b>Admin:</b> {}" \
+                                   "\nLocked <code>{}</code>.".format(html.escape(chat.title),
                                                           mention_html(user.id, user.first_name), args[0])
 
-            elif args[0] in RESTRICTION_TYPES:
+            if args[0] in RESTRICTION_TYPES:
                 sql.update_restriction(chat.id, args[0], locked=True)
                 if args[0] == "previews":
                     members = users_sql.get_chat_members(str(chat.id))
@@ -122,13 +122,11 @@ def lock(bot: Bot, update: Update, args: List[str]) -> str:
 
                 message.reply_text("Locked {} for all non-admins!".format(args[0]))
                 return "<b>{}:</b>" \
-                       "\n#LOCK" \
-                       "\n<b>Admin:</b> {}" \
-                       "\nLocked <code>{}</code>.".format(html.escape(chat.title),
+                                   "\n#LOCK" \
+                                   "\n<b>Admin:</b> {}" \
+                                   "\nLocked <code>{}</code>.".format(html.escape(chat.title),
                                                           mention_html(user.id, user.first_name), args[0])
-
-            else:
-                message.reply_text("What are you trying to lock...? Try /locktypes for the list of lockables")
+            message.reply_text("What are you trying to lock...? Try /locktypes for the list of lockables")
 
     else:
         message.reply_text("I'm not an administrator, or haven't got delete rights.")
@@ -149,39 +147,38 @@ def unlock(bot: Bot, update: Update, args: List[str]) -> str:
                 sql.update_lock(chat.id, args[0], locked=False)
                 message.reply_text("Unlocked {} for everyone!".format(args[0]))
                 return "<b>{}:</b>" \
-                       "\n#UNLOCK" \
-                       "\n<b>Admin:</b> {}" \
-                       "\nUnlocked <code>{}</code>.".format(html.escape(chat.title),
+                                   "\n#UNLOCK" \
+                                   "\n<b>Admin:</b> {}" \
+                                   "\nUnlocked <code>{}</code>.".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name), args[0])
 
-            elif args[0] in RESTRICTION_TYPES:
+            if args[0] in RESTRICTION_TYPES:
                 sql.update_restriction(chat.id, args[0], locked=False)
                 """
-                members = users_sql.get_chat_members(chat.id)
-                if args[0] == "messages":
-                    unrestr_members(bot, chat.id, members, media=False, other=False, previews=False)
+                            members = users_sql.get_chat_members(chat.id)
+                            if args[0] == "messages":
+                                unrestr_members(bot, chat.id, members, media=False, other=False, previews=False)
 
-                elif args[0] == "media":
-                    unrestr_members(bot, chat.id, members, other=False, previews=False)
+                            elif args[0] == "media":
+                                unrestr_members(bot, chat.id, members, other=False, previews=False)
 
-                elif args[0] == "other":
-                    unrestr_members(bot, chat.id, members, previews=False)
+                            elif args[0] == "other":
+                                unrestr_members(bot, chat.id, members, previews=False)
 
-                elif args[0] == "previews":
-                    unrestr_members(bot, chat.id, members)
+                            elif args[0] == "previews":
+                                unrestr_members(bot, chat.id, members)
 
-                elif args[0] == "all":
-                    unrestr_members(bot, chat.id, members, True, True, True, True)
-                """
+                            elif args[0] == "all":
+                                unrestr_members(bot, chat.id, members, True, True, True, True)
+                            """
                 message.reply_text("Unlocked {} for everyone!".format(args[0]))
 
                 return "<b>{}:</b>" \
-                       "\n#UNLOCK" \
-                       "\n<b>Admin:</b> {}" \
-                       "\nUnlocked <code>{}</code>.".format(html.escape(chat.title),
+                                   "\n#UNLOCK" \
+                                   "\n<b>Admin:</b> {}" \
+                                   "\nUnlocked <code>{}</code>.".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name), args[0])
-            else:
-                message.reply_text("What are you trying to unlock...? Try /locktypes for the list of lockables")
+            message.reply_text("What are you trying to unlock...? Try /locktypes for the list of lockables")
 
         else:
             bot.sendMessage(chat.id, "What are you trying to unlock...?")

@@ -1,5 +1,4 @@
 import random
-import re
 import json
 import urllib.request
 import urllib.parse
@@ -7,7 +6,7 @@ import wikipedia
 from wikipedia.exceptions import DisambiguationError, PageError
 
 
-from telegram import Message, Chat, Update, Bot, ParseMode
+from telegram import Update, Bot, ParseMode
 from telegram.ext import run_async
 
 from tg_bot import dispatcher
@@ -195,7 +194,7 @@ def shout(bot: Bot, update: Update, args):
     msg = "```"
     text = " ".join(args)
     result = []
-    result.append(' '.join([s for s in text]))
+    result.append(' '.join(list(text)))
     for pos, symbol in enumerate(text[1:]):
         result.append(symbol + ' ' + '  ' * pos + symbol)
     result = list("\n".join(result))
