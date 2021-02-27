@@ -1,3 +1,4 @@
+import sys
 from tg_bot import LOAD, NO_LOAD, LOGGER
 
 
@@ -15,7 +16,7 @@ def __list_all_modules():
         if to_load:
             if not all(any(mod == module_name for module_name in all_modules) for mod in to_load):
                 LOGGER.error("Invalid loadorder names. Quitting.")
-                quit(1)
+                sys.exit(1)
 
         else:
             to_load = all_modules
