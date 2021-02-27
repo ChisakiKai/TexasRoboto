@@ -21,26 +21,34 @@ from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
 Hi {}, my name is {}!
-
+// I am an Anime themed group management bot with a lot of Special Features.
 You can find the list of available commands with /help.
+==========================
+-> [Lynda's Repo](https://Anomaliii/ChisakiKai)
+-> Report [Lynda Support](https://t.me/ZeroBotSupport) if I go offline
+==========================
+`Maintained by` @Anomaliii
+
 """
 
-BOT_IMAGE = "https://telegra.ph/file/93612a540608640355f20.mp4"
+TEXAS_IMG = "https://telegra.ph/file/c68682b38f3246c585e38.jpg"
 
 HELP_STRINGS = """
 Hey there! My name is *{}*.
-I'm a modular group management bot with a few fun extras! Have a look at the following for an idea of some of \
+I'm a part of Eagle Union.
+Have a look at the following for an idea of some of \
 the things I can help you with.
-If you have any questions on how to use me, head over to @PhoenixSupport
-
 *Main* commands available:
- - /start: start the bot
- - /help: PM's you this message.
- - /help <module name>: PM's you info about that module.
- - /donate: information about how to donate!
- - /settings:
-   - in PM: will send you your settings for all supported modules.
-   - in a group: will redirect you to pm, with all that chat's settings.
+ -> `/start`
+start the bot
+-> `/help`
+PM's you this message.
+-> `/help` <module name>
+PM's you info about that module.
+-> `/donate`
+information about how to donate!
+-> `/settings`
+will redirect you to pm, with all that chat's settings.
 
 {}
 And the following:
@@ -141,23 +149,18 @@ def start(bot: Bot, update: Update, args: List[str]):
 
         else:
             first_name = update.effective_user.first_name
-            update.effective_message.reply_animation(
-                BOT_IMAGE,
+            update.effective_message.reply_photo(
+                LYNDA_IMG,
                 caption=PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton(
-                                text="Add Pɧơɛnıх to your group.",
-                                url="t.me/{}?startgroup=botstart".format(bot.username),
-                            )
-                        ]
-                    ]
-                ),
-            )
+                    [[InlineKeyboardButton(text="👥 Add Texas to your group", url="https://t.me/LyndaRobot?startgroup=new")],
+                [InlineKeyboardButton(text="🙋 Support Group", url="https://t.me/ZeroBotSupport"),
+                InlineKeyboardButton(text="🚫 Global Logs", url="https://t.me/zerobotlog")],
+                [InlineKeyboardButton(text="❔ Help", url="https://t.me/TexasArkrobott?start=help"),
+                InlineKeyboardButton(text="🔔 Update Channel", url="https://t.me/TexasUpdates")]])
     else:
-        update.effective_message.reply_text("Yo, why'd you summon me?")
+        update.effective_message.reply_text("Yo, I'm Here!")
 
 
 # for test purposes
