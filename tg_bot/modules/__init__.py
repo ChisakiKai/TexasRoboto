@@ -1,6 +1,8 @@
 import sys
 
-from tg_bot import LOAD, LOGGER, NO_LOAD
+from tg_bot import LOAD
+from tg_bot import LOGGER
+from tg_bot import NO_LOAD
 
 
 def __list_all_modules():
