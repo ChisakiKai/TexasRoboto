@@ -62,7 +62,8 @@ if ENV:
             "Your sudo users list does not contain valid integers.")
 
     try:
-        SUPPORT_USERS = {int(x) for x in os.environ.get("SUPPORT_USERS", "").split()}
+        SUPPORT_USERS = {int(x)
+                         for x in os.environ.get("SUPPORT_USERS", "").split()}
     except ValueError:
         raise Exception(
             "Your support users list does not contain valid integers.")
