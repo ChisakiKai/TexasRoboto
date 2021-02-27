@@ -6,9 +6,9 @@ import telegram.ext as tg
 from loguru import logger
 from pyrogram import Client
 
-from tg_bot.modules.helper_funcs.handlers import CustomCommandHandler
-from tg_bot.modules.helper_funcs.handlers import CustomMessageHandler
-from tg_bot.modules.helper_funcs.handlers import CustomRegexHandler
+from tg_bot.modules.helper_funcs.handlers import (CustomCommandHandler,
+                                                  CustomMessageHandler,
+                                                  CustomRegexHandler)
 
 
 class InterceptHandler(logging.Handler):
