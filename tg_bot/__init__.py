@@ -24,9 +24,10 @@ class InterceptHandler(logging.Handler):
         return self.LEVELS_MAP.get(record.levelno, record.levelno)
 
     def emit(self, record):
-        logger_opt = logger.opt(
-            depth=6, exception=record.exc_info, ansi=True, lazy=True
-        )
+        logger_opt = logger.opt(depth=6,
+                                exception=record.exc_info,
+                                ansi=True,
+                                lazy=True)
         logger_opt.log(self._get_level(record), record.getMessage())
 
 
@@ -55,26 +56,32 @@ if ENV:
     OWNER_USERNAME = os.environ.get("OWNER_USERNAME", None)
 
     try:
-        SUDO_USERS = set(int(x) for x in os.environ.get("SUDO_USERS", "").split())
+        SUDO_USERS = set(
+            int(x) for x in os.environ.get("SUDO_USERS", "").split())
     except ValueError:
-        raise Exception("Your sudo users list does not contain valid integers.")
+        raise Exception(
+            "Your sudo users list does not contain valid integers.")
 
     try:
-        SUPPORT_USERS = set(int(x) for x in os.environ.get("SUPPORT_USERS", "").split())
+        SUPPORT_USERS = set(
+            int(x) for x in os.environ.get("SUPPORT_USERS", "").split())
     except ValueError:
-        raise Exception("Your support users list does not contain valid integers.")
+        raise Exception(
+            "Your support users list does not contain valid integers.")
 
     try:
         WHITELIST_USERS = set(
-            int(x) for x in os.environ.get("WHITELIST_USERS", "").split()
-        )
+            int(x) for x in os.environ.get("WHITELIST_USERS", "").split())
     except ValueError:
-        raise Exception("Your whitelisted users list does not contain valid integers.")
+        raise Exception(
+            "Your whitelisted users list does not contain valid integers.")
 
     try:
-        DEV_USERS = set(int(x) for x in os.environ.get("DEV_USERS", "").split())
+        DEV_USERS = set(
+            int(x) for x in os.environ.get("DEV_USERS", "").split())
     except ValueError:
-        raise Exception("Your developer users list does not contain valid integers.")
+        raise Exception(
+            "Your developer users list does not contain valid integers.")
 
     WEBHOOK = bool(os.environ.get("WEBHOOK", False))
     URL = os.environ.get("URL", "")  # Does not contain token
@@ -88,7 +95,8 @@ if ENV:
     DEL_CMDS = bool(os.environ.get("DEL_CMDS", False))
     STRICT_GBAN = bool(os.environ.get("STRICT_GBAN", False))
     WORKERS = int(os.environ.get("WORKERS", 8))
-    BAN_STICKER = os.environ.get("BAN_STICKER", "CAADAgADOwADPPEcAXkko5EB3YGYAg")
+    BAN_STICKER = os.environ.get("BAN_STICKER",
+                                 "CAADAgADOwADPPEcAXkko5EB3YGYAg")
     ALLOW_EXCL = os.environ.get("ALLOW_EXCL", False)
     LASTFM_API_KEY = os.environ.get("LASTFM_API_KEY", "")
     WALL_API = os.environ.get("WALL_API", "")
@@ -102,7 +110,8 @@ if ENV:
     try:
         BL_CHATS = set(int(x) for x in os.environ.get("BL_CHATS", "").split())
     except ValueError:
-        raise Exception("Your blacklisted chats list does not contain valid integers.")
+        raise Exception(
+            "Your blacklisted chats list does not contain valid integers.")
 
 else:
     from tg_bot.config import Development as Config
@@ -119,22 +128,26 @@ else:
     try:
         SUDO_USERS = set(int(x) for x in Config.SUDO_USERS or [])
     except ValueError:
-        raise Exception("Your sudo users list does not contain valid integers.")
+        raise Exception(
+            "Your sudo users list does not contain valid integers.")
 
     try:
         SUPPORT_USERS = set(int(x) for x in Config.SUPPORT_USERS or [])
     except ValueError:
-        raise Exception("Your support users list does not contain valid integers.")
+        raise Exception(
+            "Your support users list does not contain valid integers.")
 
     try:
         WHITELIST_USERS = set(int(x) for x in Config.WHITELIST_USERS or [])
     except ValueError:
-        raise Exception("Your whitelisted users list does not contain valid integers.")
+        raise Exception(
+            "Your whitelisted users list does not contain valid integers.")
 
     try:
         DEV_USERS = set(int(x) for x in Config.DEV_USERS or [])
     except ValueError:
-        raise Exception("Your developer users list does not contain valid integers.")
+        raise Exception(
+            "Your developer users list does not contain valid integers.")
 
     WEBHOOK = Config.WEBHOOK
     URL = Config.URL
@@ -162,8 +175,8 @@ else:
     try:
         BL_CHATS = set(int(x) for x in Config.BL_CHATS or [])
     except ValueError:
-        raise Exception("Your blacklisted chats list does not contain valid integers.")
-
+        raise Exception(
+            "Your blacklisted chats list does not contain valid integers.")
 
 SUDO_USERS.add(OWNER_ID)
 DEV_USERS.add(OWNER_ID)
@@ -186,7 +199,6 @@ tg.MessageHandler = CustomMessageHandler
 
 if ALLOW_EXCL:
     tg.CommandHandler = CustomCommandHandler
-
 
 # Pyrogram Client
 pg = Client("Phoenix", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
