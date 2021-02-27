@@ -285,8 +285,7 @@ def connected(bot: Bot, update: Update,  chat, user_id, need_admin=True):
         )
         disconnect_chat(bot, update)
         raise Exception("Not admin!")
-    else:
-        return False
+    return False
 
 
 @run_async
