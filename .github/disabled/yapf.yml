@@ -20,4 +20,4 @@ jobs:
           body: This is an automated code formatting pull request.
           labels: Code Formatting
           reviewers: Accipiter7 
-          branch: ark
+          branch: autofix
