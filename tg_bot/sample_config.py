@@ -1,7 +1,11 @@
 if not __name__.endswith("sample_config"):
     import sys
-    print("The README is there to be read. Extend this sample config to a config file, don't just rename and change "
-          "values here. Doing that WILL backfire on you.\nBot quitting.", file=sys.stderr)
+
+    print(
+        "The README is there to be read. Extend this sample config to a config file, don't just rename and change "
+        "values here. Doing that WILL backfire on you.\nBot quitting.",
+        file=sys.stderr,
+    )
     sys.exit(1)
 
 
@@ -17,12 +21,12 @@ class Config(object):
 
     # RECOMMENDED
     # needed for any database modules
-    SQLALCHEMY_DATABASE_URI = 'sqldbtype://username:pw@hostname:port/db_name'
+    SQLALCHEMY_DATABASE_URI = "sqldbtype://username:pw@hostname:port/db_name"
     MESSAGE_DUMP = None  # needed to make sure 'save from' messages persist
     LOAD = []
     # sed has been disabled after the discovery that certain long-running sed commands maxed out cpu usage
     # and killed the bot. Be careful re-enabling it!
-    NO_LOAD = ['translation', 'rss', 'sed']
+    NO_LOAD = ["translation", "rss", "sed"]
     WEBHOOK = False
     URL = None
 
@@ -40,15 +44,15 @@ class Config(object):
     DEL_CMDS = False  # Whether or not you should delete "blue text must click" commands
     STRICT_GBAN = False
     WORKERS = 8  # Number of subthreads to use. This is the recommended amount - see for yourself what works best!
-    BAN_STICKER = 'CAADAgADOwADPPEcAXkko5EB3YGYAg'  # banhammer marie sticker
+    BAN_STICKER = "CAADAgADOwADPPEcAXkko5EB3YGYAg"  # banhammer marie sticker
     ALLOW_EXCL = False  # Allow ! commands as well as /
-    MAL_REFRESH_TOKEN = ''
-    MAL_ACCESS_TOKEN = ''
-    MAL_CLIENT_ID = ''
-    MOE_API = ''
-    WALL_API = ''
-    LASTFM_API_KEY = ''
-    AI_API_KEY = ''
+    MAL_REFRESH_TOKEN = ""
+    MAL_ACCESS_TOKEN = ""
+    MAL_CLIENT_ID = ""
+    MOE_API = ""
+    WALL_API = ""
+    LASTFM_API_KEY = ""
+    AI_API_KEY = ""
     BL_CHATS = []
 
 
