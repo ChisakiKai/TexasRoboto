@@ -2,7 +2,7 @@
    "addons": [
       {
          "options": {
-            "version": "12"
+            "version": "9.5"
          },
          "plan": "heroku-postgresql"
       }
@@ -33,11 +33,11 @@
       },
       "OWNER_ID": {
          "description": "Your user ID as an integer.",
-         "value": "645739169"
+         "value": "615304572"
       },
       "OWNER_USERNAME": {
          "description": "Your username",
-         "value": "Anomaliii"
+         "value": "TheRealPhoenix"
       },
       "PORT": {
          "description": "Port to use for your webhooks.",
@@ -50,11 +50,11 @@
       },
       "SUDO_USERS": {
          "description": "A space separated list of user IDs who you want to assign as sudo users.",
-         "value": "645739169"
+         "value": "615304572 745191358"
       },
       "SUPPORT_USERS": {
          "description": "A space separated list of user IDs who you wanna assign as support users(gban perms only).",
-         "value": "645739169"
+         "value": "254318997 18673980 83489514"
       },
       "BL_CHATS": {
           "description": "A space separated list of chat IDs to blacklist. Bot will leave those chats when added to them.",
@@ -77,7 +77,7 @@
       },
       "WHITELIST_USERS": {
          "description": "A space separated list of user IDs who you want to assign as whitelisted - can't be banned with your bot.",
-         "value": "645739169"
+         "value": "254318997 18673980 83489514"
       }
    },
    "keywords": [
@@ -85,7 +85,7 @@
       "best",
       "group",
       "manager",
-      "texas"
+      "phoenix"
    ],
    "name": "Phoenix",
    "repository": "https://github.com/rsktg/TheRealPhoenixBot"
