@@ -278,14 +278,13 @@ def connected(bot: Bot, update: Update,  chat, user_id, need_admin=True):
                 send_message(msg, "You must be an admin in the connected group!")
                 raise Exception("Not admin!")
             return conn_id
-        else:
-            send_message(
-                msg,
-                "The group changed the connection rights or you are no longer an admin.\n"
-                "I've disconnected you.",
-            )
-            disconnect_chat(bot, update)
-            raise Exception("Not admin!")
+        send_message(
+            msg,
+            "The group changed the connection rights or you are no longer an admin.\n"
+            "I've disconnected you.",
+        )
+        disconnect_chat(bot, update)
+        raise Exception("Not admin!")
     else:
         return False
 
