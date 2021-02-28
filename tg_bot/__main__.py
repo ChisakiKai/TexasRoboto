@@ -159,8 +159,7 @@ def start(bot: Bot, update: Update, args: List[str]):
                             InlineKeyboardButton(
                                 text="👥 Add Texas to your group",
                                 url="https://t.me/TexasArkrobot?startgroup=new",
-                                ),
-                            )
+                            ),
                         ],
                         [
                             InlineKeyboardButton(
