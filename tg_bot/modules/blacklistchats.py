@@ -20,14 +20,8 @@ def blacklist_chats(bot: Bot, update: Update):
         raise DispatcherHandlerStop
     except TelegramError as e:
         LOGGER.error(f"Couldn't leave blacklisted chat: {chat.id} due to:\n{e}")
-            
-            
-BLACKLIST_CHATS_HANDLER = MessageHandler(
-    Filters.group,
-    blacklist_chats
-)
 
-dispatcher.add_handler(
-    BLACKLIST_CHATS_HANDLER,
-    group=BL_CHATS_GROUP
-)
+
+BLACKLIST_CHATS_HANDLER = MessageHandler(Filters.group, blacklist_chats)
+
+dispatcher.add_handler(BLACKLIST_CHATS_HANDLER, group=BL_CHATS_GROUP)

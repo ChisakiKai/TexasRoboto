@@ -29,10 +29,11 @@ async def translate(_, message: Message) -> None:
     except IndexError:
         source = await trans.detect(to_translate)
         dest = "en"
-    translation = await trans(to_translate,
-                              sourcelang=source, targetlang=dest)
-    reply = f"<b>Translated from {source} to {dest}</b>:\n" \
+    translation = await trans(to_translate, sourcelang=source, targetlang=dest)
+    reply = (
+        f"<b>Translated from {source} to {dest}</b>:\n"
         f"<code>{translation.text}</code>"
+    )
 
     await message.reply_text(reply, parse_mode="html")
 
@@ -42,7 +43,7 @@ async def languages(_, message: Message) -> None:
     await message.reply_text(
         "Click [here](https://cloud.google.com/translate/docs/languages)"
         " to see the list of supported language codes!",
-        disable_web_page_preview=True
+        disable_web_page_preview=True,
     )
 
 

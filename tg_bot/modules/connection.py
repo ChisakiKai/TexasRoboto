@@ -70,7 +70,7 @@ def allow_connections(bot: Bot, update: Update, args: List[str]):
 def connection_chat(bot: Bot, update: Update):
     chat = update.effective_chat
     user = update.effective_user
-    msg = update.effective_message 
+    msg = update.effective_message
 
     conn = connected(bot, update, chat, user.id, need_admin=True)
 
@@ -92,7 +92,7 @@ def connection_chat(bot: Bot, update: Update):
 def connect_chat(bot: Bot, update: Update, args: List[str]):
     chat = update.effective_chat
     user = update.effective_user
-    msg = update.effective_message 
+    msg = update.effective_message
 
     if chat.type == "private":
         if len(args) >= 1:
@@ -238,7 +238,7 @@ def connect_chat(bot: Bot, update: Update, args: List[str]):
 
 def disconnect_chat(bot: Bot, update: Update):
     chat = update.effective_chat
-    msg = update.effective_message 
+    msg = update.effective_message
 
     if chat.type == "private":
         disconnection_status = sql.disconnect(msg.from_user.id)
@@ -250,9 +250,9 @@ def disconnect_chat(bot: Bot, update: Update):
         send_message(msg, "This command is only available in PM.")
 
 
-def connected(bot: Bot, update: Update,  chat, user_id, need_admin=True):
+def connected(bot: Bot, update: Update, chat, user_id, need_admin=True):
     user = update.effective_user
-    msg = update.effective_message 
+    msg = update.effective_message
 
     if chat.type == chat.PRIVATE and sql.get_connected_chat(user_id):
 
@@ -294,14 +294,13 @@ def connected(bot: Bot, update: Update,  chat, user_id, need_admin=True):
 
 @run_async
 def help_connect_chat(bot: Bot, update: Update):
-    msg = update.effective_message 
+    msg = update.effective_message
 
     if msg.chat.type != "private":
         send_message(msg, "PM me with that command to get help.")
         return
     else:
         send_message(msg, CONNECT_HELP_TXT, parse_mode="markdown")
-
 
 
 @run_async
