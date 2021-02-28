@@ -24,8 +24,8 @@ Hi {}, my name is {}!
 // I am an Anime themed group management bot with a lot of Special Features.
 You can find the list of available commands with /help.
 ==========================
--> [Lynda's Repo](https://Anomaliii/ChisakiKai)
--> Report [Lynda Support](https://t.me/ZeroBotSupport) if I go offline
+-> [Texas Repo](https://Anomaliii/ChisakiKai)
+-> Report [Texas Support](https://t.me/ZeroBotSupport) if I go offline
 ==========================
 `Maintained by` @Anomaliii
 
@@ -150,17 +150,34 @@ def start(bot: Bot, update: Update, args: List[str]):
         else:
             first_name = update.effective_user.first_name
             update.effective_message.reply_photo(
-                LYNDA_IMG,
+                TEXAS_IMG,
                 caption=PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton(text="👥 Add Texas to your group", url="https://t.me/LyndaRobot?startgroup=new")],
-                [InlineKeyboardButton(text="🙋 Support Group", url="https://t.me/ZeroBotSupport"),
-                InlineKeyboardButton(text="🚫 Global Logs", url="https://t.me/zerobotlog")],
-                [InlineKeyboardButton(text="❔ Help", url="https://t.me/TexasArkrobott?start=help"),
-                InlineKeyboardButton(text="🔔 Update Channel", url="https://t.me/TexasUpdates")]])
-    else:
-        update.effective_message.reply_text("Yo, I'm Here!")
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="Add to your group",
+                                url="t.me/{}?startgroup=true".format(
+                                    context.bot.username
+                                ),
+                            )
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="Support Group", url=f"https://t.me/{SUPPORT_CHAT}"
+                            ),
+                            InlineKeyboardButton(
+                                text="Source code",
+                                url="https://github.com/Anomaliii/KaiRobot",
+                            ),
+                        ],
+                    ]
+                ),
+            )
+            
+   else:         
+        update.effective_message.reply_text("Yo, I'm Here!") 
 
 
 # for test purposes
