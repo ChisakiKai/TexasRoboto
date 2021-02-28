@@ -170,7 +170,7 @@ def start(bot: Bot, update: Update, args: List[str]):
                             ),
                             InlineKeyboardButton(
                                 text="❔ Help",
-                                url=f"https://t.me/TexasArkrobot?start=help"",
+                                url=f"https://t.me/TexasArkrobot?start=help",
                             ),
                         ],
                     ]
