@@ -157,7 +157,7 @@ def start(bot: Bot, update: Update, args: List[str]):
                     [
                         [
                             InlineKeyboardButton(
-                                text="Add to your group",
+                                text="👥 Add Texasto your group",
                                 url="t.me/{}?startgroup=true".format(
                                     context.bot.username
                                 ),
@@ -165,18 +165,19 @@ def start(bot: Bot, update: Update, args: List[str]):
                         ],
                         [
                             InlineKeyboardButton(
-                                text="Support Group", url=f"https://t.me/{SUPPORT_CHAT}"
+                                text="🙋 Support Group", 
+                                url=f"https://t.me/{SUPPORT_CHAT}"
                             ),
                             InlineKeyboardButton(
-                                text="Source code",
-                                url="https://github.com/Anomaliii/KaiRobot",
+                                text="❔ Help",
+                                url="https://t.me/TexasArkrobot?start=help"",
                             ),
                         ],
                     ]
                 ),
             )
             
-   else:         
+    else:         
         update.effective_message.reply_text("Yo, I'm Here!") 
 
 
