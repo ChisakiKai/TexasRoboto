@@ -157,20 +157,19 @@ def start(bot: Bot, update: Update, args: List[str]):
                     [
                         [
                             InlineKeyboardButton(
-                                text="👥 Add Texasto your group",
-                                url="t.me/{}?startgroup=true".format(
-                                    context.bot.username
+                                text="👥 Add Texas to your group",
+                                url="https://t.me/TexasArkrobot?startgroup=new",
                                 ),
                             )
                         ],
                         [
                             InlineKeyboardButton(
                                 text="🙋 Support Group", 
-                                url=f"https://t.me/{SUPPORT_CHAT}"
+                                url=f"https://t.me/ZeroBotSupport"
                             ),
                             InlineKeyboardButton(
                                 text="❔ Help",
-                                url=f"https://t.me/TexasArkrobot?start=help",
+                                url="https://t.me/TexasArkrobot?start=help",
                             ),
                         ],
                     ]
