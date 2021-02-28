@@ -2,6 +2,7 @@
 language: "Indonesia 🇮🇩"
 # name of people(s) who worked on this translation
 authors: "@Anomaliii" 
+src code: "@dank_as_fuck"
 
 # languages
 curr_chat_lang: "Hey. Your current language is {}, select the one you want from the buttons below :)"
