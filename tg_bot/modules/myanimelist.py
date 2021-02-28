@@ -4,7 +4,13 @@ from malclient.exceptions import APIException
 
 from telegram import Bot, Update, Message, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import run_async
-from tg_bot import OWNER_ID, MAL_CLIENT_ID, MAL_ACCESS_TOKEN, MAL_REFRESH_TOKEN, dispatcher
+from tg_bot import (
+    OWNER_ID,
+    MAL_CLIENT_ID,
+    MAL_ACCESS_TOKEN,
+    MAL_REFRESH_TOKEN,
+    dispatcher,
+)
 from tg_bot.modules.disable import DisableAbleCommandHandler
 
 
@@ -15,14 +21,14 @@ client.init(access_token=MAL_ACCESS_TOKEN)
 def refresh_token(msg: Message, error: APIException) -> None:
     if str(error.response) == "<Response [401]>":
         client.refresh_bearer_token(
-            client_id=MAL_CLIENT_ID,
-            refresh_token=MAL_REFRESH_TOKEN,
-            client_secret=None
+            client_id=MAL_CLIENT_ID, refresh_token=MAL_REFRESH_TOKEN, client_secret=None
         )
         new_access_token = client.bearer_token
         new_refresh_token = client.refresh_token
-        MSG_TEXT = (f"Your MAL access token has expired.\n*New Access Token*: `{new_access_token}`\n"
-            f"*New Refresh Token*: `{new_refresh_token}`")
+        MSG_TEXT = (
+            f"Your MAL access token has expired.\n*New Access Token*: `{new_access_token}`\n"
+            f"*New Refresh Token*: `{new_refresh_token}`"
+        )
         bot.send_message(OWNER_ID, MSG_TEXT, parse_mode="MARKDOWN")
     else:
         msg.reply_text(f"An error occurred:\n`{error}`", parse_mode="MARKDOWN")
@@ -77,9 +83,13 @@ def search_anime(bot: Bot, update: Update, args: List[str]) -> None:
     text += f"<a href='{image}'>\u200c</a>"
     text += res.synopsis
     keyb = [
-        [InlineKeyboardButton("More Information", url=f"https://myanimelist.net/anime/{anime_id}")]
+        [
+            InlineKeyboardButton(
+                "More Information", url=f"https://myanimelist.net/anime/{anime_id}"
+            )
+        ]
     ]
-    
+
     msg.reply_text(text, parse_mode="HTML", reply_markup=InlineKeyboardMarkup(keyb))
 
 
@@ -104,7 +114,7 @@ def search_manga(bot: Bot, update: Update, args: List[str]) -> None:
         genres_list.append(i.name)
     genres = ", ".join(genres_list)
     image = res.main_picture.large
-    
+
     text = f"<b>{res.title} ({res.alternative_titles.ja})</b>\n"
     text += f"<b>Type</b>: <code>{res.media_type.capitalize()}</code>\n"
     text += f"<b>Status</b>: <code>{res.status.replace('_', ' ').capitalize()}</code>\n"
@@ -118,9 +128,13 @@ def search_manga(bot: Bot, update: Update, args: List[str]) -> None:
     text += f"<a href='{image}'>\u200c</a>"
     text += f"\n{res.synopsis}"
     keyb = [
-        [InlineKeyboardButton("More Information", url=f"https://myanimelist.net/manga/{manga_id}")]
+        [
+            InlineKeyboardButton(
+                "More Information", url=f"https://myanimelist.net/manga/{manga_id}"
+            )
+        ]
     ]
-    
+
     msg.reply_text(text, parse_mode="HTML", reply_markup=InlineKeyboardMarkup(keyb))
 
 
